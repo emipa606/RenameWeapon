@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>8de05450-2001-4a04-af20-58f7e2574917</ID>
   <ModName>Rename Weapon (Continued)</ModName>
-  <Version>1.4.0</Version>
+  <Version>1.4.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>emipa606</Owner>
@@ -12,7 +12,3 @@
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
-
-
-
-
