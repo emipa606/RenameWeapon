@@ -10,4 +10,5 @@
   <RG.HoldingPeriodInDaysForAutoRename>Wartezeit für die automatische Umbenennung (in Tagen):</RG.HoldingPeriodInDaysForAutoRename>
   <RG.PawnRenamedGunMessage>{PAWN_nameDef} hat {1} in {2} umbenannt.</RG.PawnRenamedGunMessage>
   <RG.CurrentModVersion>Installierte Mod-Version: {0}</RG.CurrentModVersion>
+  <RG.OverrideRelicName>Relikt-Name außer Kraft setzen</RG.OverrideRelicName>
 </LanguageData>

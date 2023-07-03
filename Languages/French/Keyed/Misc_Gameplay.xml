@@ -10,4 +10,5 @@
   <RG.HoldingPeriodInDaysForAutoRename>Période d'attente de l'arme pour le renommage automatique (en jours) :</RG.HoldingPeriodInDaysForAutoRename>
   <RG.PawnRenamedGunMessage>{PAWN_nameDef} a renommé {1} en {2}.</RG.PawnRenamedGunMessage>
   <RG.CurrentModVersion>Version installée du mod : {0}</RG.CurrentModVersion>
+  <RG.OverrideRelicName>Remplacer le nom de la relique</RG.OverrideRelicName>
 </LanguageData>

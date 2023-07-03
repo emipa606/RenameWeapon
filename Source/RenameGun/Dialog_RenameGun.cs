@@ -15,7 +15,7 @@ public class Dialog_RenameGun : Dialog_Rename
         curName = comp.fixedName ?? gun.def.label;
     }
 
-    public override Vector2 InitialSize => new Vector2(280f, 230f);
+    public override Vector2 InitialSize => new Vector2(280f, 260f);
 
     public override AcceptanceReport NameIsValid(string name)
     {
@@ -61,6 +61,12 @@ public class Dialog_RenameGun : Dialog_Rename
             "RG.IncludeStuff".Translate(), ref comp.includeStuff);
         Widgets.CheckboxLabeled(new Rect(0f, renameRect.yMax + 10 + 28 + 28, inRect.width - 4, 24f),
             "RG.IncludeQuality".Translate(), ref comp.includeQuality);
+        if (ModLister.IdeologyInstalled && gun.StyleSourcePrecept != null)
+        {
+            Widgets.CheckboxLabeled(new Rect(0f, renameRect.yMax + 10 + 28 + 28 + 28, inRect.width - 4, 24f),
+                "RG.OverrideRelicName".Translate(), ref comp.overrideRelicName);
+        }
+
         var okRect = new Rect(15f, inRect.height - 35f, inRect.width - 15f - 15f, 35f);
         if (!(Widgets.ButtonText(okRect, "OK") || returnPressed))
         {

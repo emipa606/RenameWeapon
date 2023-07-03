@@ -65,4 +65,4 @@ or Suffix Quality
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2994143207]Last updated 2023-06-29
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2994143207]Last updated 2023-07-03

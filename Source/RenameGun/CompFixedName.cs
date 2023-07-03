@@ -13,6 +13,8 @@ public class CompFixedName : ThingComp
     public bool includeHP = true;
     public bool includeQuality = true;
     public bool includeStuff = true;
+    public bool overrideRelicName;
+
     public CompProperties_FixedName Props => props as CompProperties_FixedName;
 
     public Pawn HoldingPawn
@@ -45,6 +47,11 @@ public class CompFixedName : ThingComp
 
     public override string TransformLabel(string label)
     {
+        if (parent.StyleSourcePrecept != null && !overrideRelicName)
+        {
+            return base.TransformLabel(label);
+        }
+
         if (!colonistSetName.NullOrEmpty())
         {
             return colonistSetName;
@@ -86,6 +93,7 @@ public class CompFixedName : ThingComp
         Scribe_Values.Look(ref includeHP, "includeHP", true);
         Scribe_Values.Look(ref includeQuality, "includeQuality", true);
         Scribe_Values.Look(ref includeStuff, "includeStuff", true);
+        Scribe_Values.Look(ref overrideRelicName, "overrideRelicName");
         Scribe_Values.Look(ref holdingCounter, "holdingCounter");
         Scribe_References.Look(ref curPawnHolder, "curPawnHolder");
         if (Scribe.mode == LoadSaveMode.PostLoadInit)

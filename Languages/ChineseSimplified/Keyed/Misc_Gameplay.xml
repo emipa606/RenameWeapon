@@ -10,4 +10,5 @@
   <RG.HoldingPeriodInDaysForAutoRename>自动重命名的枪支持有期（以天为单位）：</RG.HoldingPeriodInDaysForAutoRename>
   <RG.PawnRenamedGunMessage>{PAWN_nameDef}已将{1}改名为{2}。</RG.PawnRenamedGunMessage>
   <RG.CurrentModVersion>已安装的mod-version：{0}</RG.CurrentModVersion>
+  <RG.OverrideRelicName>覆盖遗迹名称</RG.OverrideRelicName>
 </LanguageData>

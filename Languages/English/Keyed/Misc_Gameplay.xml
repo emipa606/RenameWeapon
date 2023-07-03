@@ -3,6 +3,7 @@
   <RG.IncludeHP>Include HP</RG.IncludeHP>
   <RG.IncludeStuff>Include stuff</RG.IncludeStuff>
   <RG.IncludeQuality>Include quality</RG.IncludeQuality>
+  <RG.OverrideRelicName>Override relic-name</RG.OverrideRelicName>
   <RG.Rename>Rename {0}</RG.Rename>
   <RG.AllowColonistsToRenameGuns>Allow colonists to rename guns on their own</RG.AllowColonistsToRenameGuns>
   <RG.AlwaysKeepPlayerSetNames>Always keep player set names</RG.AlwaysKeepPlayerSetNames>
