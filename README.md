@@ -4,6 +4,8 @@
 
 Update of Taranchuk, Halituis Amaricanouss mod https://steamcommunity.com/sharedfiles/filedetails/?id=2814171113
 
+- Added option to override relic-names
+
 ![Image](https://i.imgur.com/pufA0kM.png)
 
 	
@@ -65,4 +67,4 @@ or Suffix Quality
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2994143207]Last updated 2023-07-03
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2994143207]Last updated 2023-07-05

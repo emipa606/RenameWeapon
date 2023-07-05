@@ -1,5 +1,8 @@
 # Changelog for RenameWeapon
 
+1.4.3 - Colonist weapon-names will be blanked if the mod-setting is turned off.
+
+
 1.4.2 - Added option to override relic-names.
 Used DeepL to update translations for ChineseSimplified, French, German
 

@@ -96,5 +96,9 @@ public class Dialog_RenameGun : Dialog_Rename
     {
         var comp = gun.TryGetComp<CompFixedName>();
         comp.fixedName = name;
+        if (!RenameGunSettings.allowPawnsToRenameGuns)
+        {
+            comp.colonistSetName = string.Empty;
+        }
     }
 }
