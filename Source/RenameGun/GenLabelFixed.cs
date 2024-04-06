@@ -20,7 +20,7 @@ public static class GenLabelFixed
         //    key.maxHealth = t.MaxHitPoints;
         //}
 
-        //if (t is Apparel apparel)
+        //if (t is Apparel)
         //{
         //    key.wornByCorpse = apparel.WornByCorpse;
         //}

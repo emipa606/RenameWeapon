@@ -4,22 +4,39 @@ using Verse;
 
 namespace RenameGun;
 
-public class Dialog_RenameGun : Dialog_Rename
+public class Dialog_RenameGun : Window
 {
     private readonly Thing gun;
+    protected string curName;
+
+    private bool focusedRenameField;
+    private int startAcceptingInputAtFrame;
 
     public Dialog_RenameGun(Thing gun)
     {
+        forcePause = true;
+        doCloseX = true;
+        absorbInputAroundWindow = true;
+        closeOnAccept = false;
+        closeOnClickedOutside = true;
         this.gun = gun;
         var comp = gun.TryGetComp<CompFixedName>();
         curName = comp.fixedName ?? gun.def.label;
     }
 
     public override Vector2 InitialSize => new Vector2(280f, 260f);
+    private bool AcceptsInput => startAcceptingInputAtFrame <= Time.frameCount;
 
-    public override AcceptanceReport NameIsValid(string name)
+    protected int MaxNameLength => 28;
+
+    public void WasOpenedByHotkey()
     {
-        return true;
+        startAcceptingInputAtFrame = Time.frameCount + 1;
+    }
+
+    public AcceptanceReport NameIsValid(string name)
+    {
+        return name.Length != 0;
     }
 
 
@@ -92,7 +109,7 @@ public class Dialog_RenameGun : Dialog_Rename
         }
     }
 
-    public override void SetName(string name)
+    public void SetName(string name)
     {
         var comp = gun.TryGetComp<CompFixedName>();
         comp.fixedName = name;

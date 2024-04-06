@@ -16,7 +16,7 @@ internal static class SettingsHelper
         var anchor = Text.Anchor;
         Text.Anchor = TextAnchor.MiddleLeft;
         Label(rect2, label);
-        var num = HorizontalSlider_NewTemp(rect3, val, min, max, true);
+        var num = HorizontalSlider(rect3, val, min, max, true);
         val = num;
         Text.Anchor = TextAnchor.MiddleRight;
         Label(rect4, string.Format(format, val));

@@ -18,8 +18,8 @@ public class GameComponent_RenameManager : GameComponent
 
     public void Init()
     {
-        things ??= new List<Thing>();
-        comps ??= new List<CompFixedName>();
+        things ??= [];
+        comps ??= [];
         Instance = this;
     }
 

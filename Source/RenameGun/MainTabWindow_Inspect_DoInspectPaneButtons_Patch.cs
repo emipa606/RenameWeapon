@@ -5,10 +5,10 @@ using Verse;
 
 namespace RenameGun;
 
-[HarmonyPatch(typeof(MainTabWindow_Inspect), "DoInspectPaneButtons")]
+[HarmonyPatch(typeof(MainTabWindow_Inspect), nameof(MainTabWindow_Inspect.DoInspectPaneButtons))]
 public static class MainTabWindow_Inspect_DoInspectPaneButtons_Patch
 {
-    public static void Postfix(Rect rect, ref float lineEndWidth)
+    public static void Postfix(Rect rect)
     {
         var singleSelectedThing = Find.Selector.SingleSelectedThing;
         if (singleSelectedThing == null || !singleSelectedThing.def.IsWeapon || singleSelectedThing.def.IsStuff ||

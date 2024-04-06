@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Verse;
 
 namespace RenameGun;
@@ -18,7 +17,7 @@ public static class RenameGunStartup
 
             if (thingDef.comps is null)
             {
-                thingDef.comps = new List<CompProperties>();
+                thingDef.comps = [];
             }
 
             thingDef.comps.Add(new CompProperties_FixedName());

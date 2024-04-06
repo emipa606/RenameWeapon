@@ -1,5 +1,8 @@
 # Changelog for RenameWeapon
 
+1.5.0 - Updated for 1.5
+
+
 1.4.3 - Colonist weapon-names will be blanked if the mod-setting is turned off.
 
 
