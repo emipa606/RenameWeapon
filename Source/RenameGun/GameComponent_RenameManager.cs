@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
 using Verse;
 
 namespace RenameGun;
@@ -68,8 +67,10 @@ public class GameComponent_RenameManager : GameComponent
             }
 
             comp.holdingCounter++;
-            if (comp.holdingCounter >=
-                RenameGunSettings.holdingPeriodInDaysForAutoRename * GenDate.TicksPerDay)
+            var pawnTimer = Rand.RangeInclusiveSeeded(RenameGunSettings.holdingPeriodInDaysForAutoRenameRange.min,
+                RenameGunSettings.holdingPeriodInDaysForAutoRenameRange.max, holdingPawn.GetHashCode());
+
+            if (comp.holdingCounter > pawnTimer)
             {
                 comp.AutoRename();
             }
