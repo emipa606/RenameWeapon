@@ -1,5 +1,8 @@
 # Changelog for RenameWeapon
 
+1.6.0 - Mod updated for 1.6 and passed autotests
+
+
 1.5.1 - Changed the the time until a pawn renames a weapon to be a range instead
 Used DeepL to update translations for ChineseSimplified, French, German
 

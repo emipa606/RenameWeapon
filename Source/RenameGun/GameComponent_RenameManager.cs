@@ -7,15 +7,15 @@ namespace RenameGun;
 public class GameComponent_RenameManager : GameComponent
 {
     public static GameComponent_RenameManager Instance;
-    public List<CompFixedName> comps;
-    public List<Thing> things;
+    private List<CompFixedName> comps;
+    private List<Thing> things;
 
     public GameComponent_RenameManager(Game game)
     {
         Instance = this;
     }
 
-    public void Init()
+    private void init()
     {
         things ??= [];
         comps ??= [];
@@ -25,26 +25,26 @@ public class GameComponent_RenameManager : GameComponent
     public override void LoadedGame()
     {
         base.LoadedGame();
-        Init();
+        init();
     }
 
     public override void StartedNewGame()
     {
         base.StartedNewGame();
-        Init();
+        init();
     }
 
     public override void GameComponentTick()
     {
         base.GameComponentTick();
-        if (!RenameGunSettings.allowPawnsToRenameGuns)
+        if (!RenameGunSettings.AllowPawnsToRenameGuns)
         {
             return;
         }
 
         foreach (var comp in comps)
         {
-            if (!comp.fixedName.NullOrEmpty() && RenameGunSettings.alwaysKeepPlayerSetNames)
+            if (!comp.fixedName.NullOrEmpty() && RenameGunSettings.AlwaysKeepPlayerSetNames)
             {
                 continue;
             }
@@ -67,8 +67,8 @@ public class GameComponent_RenameManager : GameComponent
             }
 
             comp.holdingCounter++;
-            var pawnTimer = Rand.RangeInclusiveSeeded(RenameGunSettings.holdingPeriodInDaysForAutoRenameRange.min,
-                RenameGunSettings.holdingPeriodInDaysForAutoRenameRange.max, holdingPawn.GetHashCode());
+            var pawnTimer = Rand.RangeInclusiveSeeded(RenameGunSettings.HoldingPeriodInDaysForAutoRenameRange.min,
+                RenameGunSettings.HoldingPeriodInDaysForAutoRenameRange.max, holdingPawn.GetHashCode());
 
             if (comp.holdingCounter > pawnTimer)
             {
@@ -79,7 +79,7 @@ public class GameComponent_RenameManager : GameComponent
 
     public void TryAddThing(CompFixedName compFixedName)
     {
-        Init();
+        init();
         if (!things.Contains(compFixedName.parent))
         {
             things.Add(compFixedName.parent);
@@ -104,7 +104,7 @@ public class GameComponent_RenameManager : GameComponent
             return;
         }
 
-        Init();
+        init();
         things = things.Where(x => x.TryGetComp<CompFixedName>() != null).ToList();
         comps = things.Select(x => x.TryGetComp<CompFixedName>()).ToList();
     }

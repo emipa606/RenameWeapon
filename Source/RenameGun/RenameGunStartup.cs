@@ -9,12 +9,12 @@ public static class RenameGunStartup
 {
     static RenameGunStartup()
     {
-        if (RenameGunSettings.holdingPeriodInDaysForAutoRename > -1)
+        if (RenameGunSettings.HoldingPeriodInDaysForAutoRename > -1)
         {
-            var oldSettingTicks = (int)(RenameGunSettings.holdingPeriodInDaysForAutoRename * GenDate.TicksPerDay);
-            RenameGunSettings.holdingPeriodInDaysForAutoRenameRange = new IntRange(oldSettingTicks, oldSettingTicks);
-            RenameGunSettings.holdingPeriodInDaysForAutoRename = -1;
-            RenameGunMod.settings.Write();
+            var oldSettingTicks = (int)(RenameGunSettings.HoldingPeriodInDaysForAutoRename * GenDate.TicksPerDay);
+            RenameGunSettings.HoldingPeriodInDaysForAutoRenameRange = new IntRange(oldSettingTicks, oldSettingTicks);
+            RenameGunSettings.HoldingPeriodInDaysForAutoRename = -1;
+            RenameGunMod.Settings.Write();
         }
 
         foreach (var thingDef in DefDatabase<ThingDef>.AllDefs)
@@ -24,10 +24,7 @@ public static class RenameGunStartup
                 continue;
             }
 
-            if (thingDef.comps is null)
-            {
-                thingDef.comps = [];
-            }
+            thingDef.comps ??= [];
 
             thingDef.comps.Add(new CompProperties_FixedName());
         }

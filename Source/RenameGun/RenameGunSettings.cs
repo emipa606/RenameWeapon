@@ -8,48 +8,48 @@ namespace RenameGun;
 
 public class RenameGunSettings : ModSettings
 {
-    public static bool allowPawnsToRenameGuns = true;
-    public static bool alwaysKeepPlayerSetNames = true;
-    public static float holdingPeriodInDaysForAutoRename = -1;
+    public static bool AllowPawnsToRenameGuns = true;
+    public static bool AlwaysKeepPlayerSetNames = true;
+    public static float HoldingPeriodInDaysForAutoRename = -1;
 
-    public static IntRange holdingPeriodInDaysForAutoRenameRange =
-        new IntRange(3 * GenDate.TicksPerDay, 3 * GenDate.TicksPerDay);
+    public static IntRange HoldingPeriodInDaysForAutoRenameRange =
+        new(3 * GenDate.TicksPerDay, 3 * GenDate.TicksPerDay);
 
     public override void ExposeData()
     {
         base.ExposeData();
-        Scribe_Values.Look(ref holdingPeriodInDaysForAutoRename, "holdingPeriodInDaysForAutoRename");
-        Scribe_Values.Look(ref holdingPeriodInDaysForAutoRenameRange, "holdingPeriodInDaysForAutoRenameRange");
-        Scribe_Values.Look(ref allowPawnsToRenameGuns, "allowPawnsToRenameGuns");
-        Scribe_Values.Look(ref alwaysKeepPlayerSetNames, "alwaysKeepPlayerSetNames");
+        Scribe_Values.Look(ref HoldingPeriodInDaysForAutoRename, "holdingPeriodInDaysForAutoRename");
+        Scribe_Values.Look(ref HoldingPeriodInDaysForAutoRenameRange, "holdingPeriodInDaysForAutoRenameRange");
+        Scribe_Values.Look(ref AllowPawnsToRenameGuns, "allowPawnsToRenameGuns");
+        Scribe_Values.Look(ref AlwaysKeepPlayerSetNames, "alwaysKeepPlayerSetNames");
     }
 
-    public void DoSettingsWindowContents(Rect inRect)
+    public static void DoSettingsWindowContents(Rect inRect)
     {
         var rect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height);
         var listingStandard = new Listing_Standard();
         listingStandard.Begin(rect);
-        listingStandard.CheckboxLabeled("RG.AllowColonistsToRenameGuns".Translate(), ref allowPawnsToRenameGuns);
-        listingStandard.CheckboxLabeled("RG.AlwaysKeepPlayerSetNames".Translate(), ref alwaysKeepPlayerSetNames);
+        listingStandard.CheckboxLabeled("RG.AllowColonistsToRenameGuns".Translate(), ref AllowPawnsToRenameGuns);
+        listingStandard.CheckboxLabeled("RG.AlwaysKeepPlayerSetNames".Translate(), ref AlwaysKeepPlayerSetNames);
 
         var rangeRect = listingStandard.GetRect(32f);
-        IntRange(rangeRect, 1, ref holdingPeriodInDaysForAutoRenameRange, 0, 60 * GenDate.TicksPerDay,
+        intRange(rangeRect, 1, ref HoldingPeriodInDaysForAutoRenameRange, 0, 60 * GenDate.TicksPerDay,
             "RG.HoldingPeriodInDaysForAutoRenameRange".Translate(
-                holdingPeriodInDaysForAutoRenameRange.min.ToStringTicksToPeriod(),
-                holdingPeriodInDaysForAutoRenameRange.max.ToStringTicksToPeriod()));
+                HoldingPeriodInDaysForAutoRenameRange.min.ToStringTicksToPeriod(),
+                HoldingPeriodInDaysForAutoRenameRange.max.ToStringTicksToPeriod()));
 
-        if (RenameGunMod.currentVersion != null)
+        if (RenameGunMod.CurrentVersion != null)
         {
             listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listingStandard.Label("RG.CurrentModVersion".Translate(RenameGunMod.currentVersion));
+            listingStandard.Label("RG.CurrentModVersion".Translate(RenameGunMod.CurrentVersion));
             GUI.contentColor = Color.white;
         }
 
         listingStandard.End();
     }
 
-    public static void IntRange(Rect rect, int id, ref IntRange range, int min = 0, int max = 100, string label = null,
+    private static void intRange(Rect rect, int id, ref IntRange range, int min = 0, int max = 100, string label = null,
         int minWidth = 0)
     {
         var rect2 = rect;
@@ -112,40 +112,46 @@ public class RenameGunSettings : ModSettings
             {
                 var num7 = Mathf.RoundToInt(Mathf.Clamp(
                     ((Event.current.mousePosition.x - rect2.x) / rect2.width * (max - min)) + min, min, max));
-                if (curDragEnd == RangeEnd.Min)
+                switch (curDragEnd)
                 {
-                    if (num7 != range.min)
+                    case RangeEnd.Min:
                     {
-                        range.min = num7;
-                        if (range.min > max - minWidth)
+                        if (num7 != range.min)
                         {
-                            range.min = max - minWidth;
+                            range.min = num7;
+                            if (range.min > max - minWidth)
+                            {
+                                range.min = max - minWidth;
+                            }
+
+                            var num8 = Mathf.Max(min, range.min + minWidth);
+                            if (range.max < num8)
+                            {
+                                range.max = num8;
+                            }
+
+                            CheckPlayDragSliderSound();
                         }
 
-                        var num8 = Mathf.Max(min, range.min + minWidth);
-                        if (range.max < num8)
+                        break;
+                    }
+                    case RangeEnd.Max when num7 != range.max:
+                    {
+                        range.max = num7;
+                        if (range.max < min + minWidth)
                         {
-                            range.max = num8;
+                            range.max = min + minWidth;
+                        }
+
+                        var num9 = Mathf.Min(max, range.max - minWidth);
+                        if (range.min > num9)
+                        {
+                            range.min = num9;
                         }
 
                         CheckPlayDragSliderSound();
+                        break;
                     }
-                }
-                else if (curDragEnd == RangeEnd.Max && num7 != range.max)
-                {
-                    range.max = num7;
-                    if (range.max < min + minWidth)
-                    {
-                        range.max = min + minWidth;
-                    }
-
-                    var num9 = Mathf.Min(max, range.max - minWidth);
-                    if (range.min > num9)
-                    {
-                        range.min = num9;
-                    }
-
-                    CheckPlayDragSliderSound();
                 }
 
                 if (Event.current.type == EventType.MouseDrag)

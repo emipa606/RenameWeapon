@@ -7,7 +7,7 @@ namespace RenameGun;
 public class Dialog_RenameGun : Window
 {
     private readonly Thing gun;
-    protected string curName;
+    private string curName;
 
     private bool focusedRenameField;
     private int startAcceptingInputAtFrame;
@@ -24,17 +24,17 @@ public class Dialog_RenameGun : Window
         curName = comp.fixedName ?? gun.def.label;
     }
 
-    public override Vector2 InitialSize => new Vector2(280f, 260f);
+    public override Vector2 InitialSize => new(280f, 260f);
     private bool AcceptsInput => startAcceptingInputAtFrame <= Time.frameCount;
 
-    protected int MaxNameLength => 28;
+    private static int MaxNameLength => 28;
 
     public void WasOpenedByHotkey()
     {
         startAcceptingInputAtFrame = Time.frameCount + 1;
     }
 
-    public AcceptanceReport NameIsValid(string name)
+    private static AcceptanceReport nameIsValid(string name)
     {
         return name.Length != 0;
     }
@@ -90,7 +90,7 @@ public class Dialog_RenameGun : Window
             return;
         }
 
-        var acceptanceReport = NameIsValid(curName);
+        var acceptanceReport = nameIsValid(curName);
         if (!acceptanceReport.Accepted)
         {
             if (acceptanceReport.Reason.NullOrEmpty())
@@ -104,16 +104,16 @@ public class Dialog_RenameGun : Window
         }
         else
         {
-            SetName(curName);
+            setName(curName);
             Find.WindowStack.TryRemove(this);
         }
     }
 
-    public void SetName(string name)
+    private void setName(string name)
     {
         var comp = gun.TryGetComp<CompFixedName>();
         comp.fixedName = name;
-        if (!RenameGunSettings.allowPawnsToRenameGuns)
+        if (!RenameGunSettings.AllowPawnsToRenameGuns)
         {
             comp.colonistSetName = string.Empty;
         }

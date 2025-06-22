@@ -6,19 +6,19 @@ namespace RenameGun;
 
 public class RenameGunMod : Mod
 {
-    public static RenameGunSettings settings;
-    public static string currentVersion;
+    public static RenameGunSettings Settings;
+    public static string CurrentVersion;
 
     public RenameGunMod(ModContentPack pack) : base(pack)
     {
-        settings = GetSettings<RenameGunSettings>();
-        currentVersion = VersionFromManifest.GetVersionFromModMetaData(pack.ModMetaData);
+        Settings = GetSettings<RenameGunSettings>();
+        CurrentVersion = VersionFromManifest.GetVersionFromModMetaData(pack.ModMetaData);
     }
 
     public override void DoSettingsWindowContents(Rect inRect)
     {
         base.DoSettingsWindowContents(inRect);
-        settings.DoSettingsWindowContents(inRect);
+        RenameGunSettings.DoSettingsWindowContents(inRect);
     }
 
     public override string SettingsCategory()

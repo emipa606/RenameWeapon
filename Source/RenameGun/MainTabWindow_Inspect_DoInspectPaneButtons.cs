@@ -6,7 +6,7 @@ using Verse;
 namespace RenameGun;
 
 [HarmonyPatch(typeof(MainTabWindow_Inspect), nameof(MainTabWindow_Inspect.DoInspectPaneButtons))]
-public static class MainTabWindow_Inspect_DoInspectPaneButtons_Patch
+public static class MainTabWindow_Inspect_DoInspectPaneButtons
 {
     public static void Postfix(Rect rect)
     {
