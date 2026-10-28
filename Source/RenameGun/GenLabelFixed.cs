@@ -33,9 +33,12 @@ public static class GenLabelFixed
         bool includeHp)
     {
         var styleDef = t.StyleDef;
-        var text = styleDef == null || styleDef.overrideLabel.NullOrEmpty()
-            ? thingLabel(name, includeStuff ? t.Stuff : null)
-            : styleDef.overrideLabel;
+        var text = styleDef.overrideLabel;
+        if (styleDef.overrideLabel.NullOrEmpty())
+        {
+            text = thingLabel(name, includeStuff ? t.Stuff : null);
+        }
+
         var tryGetQuality = t.TryGetQuality(out var qc) && includeQuality;
         var hitPoints = t.HitPoints;
         var maxHitPoints = t.MaxHitPoints;
