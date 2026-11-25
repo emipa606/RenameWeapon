@@ -33,8 +33,8 @@ public static class GenLabelFixed
         bool includeHp)
     {
         var styleDef = t.StyleDef;
-        var text = styleDef.overrideLabel;
-        if (styleDef.overrideLabel.NullOrEmpty())
+        var text = styleDef?.overrideLabel;
+        if (text.NullOrEmpty())
         {
             text = thingLabel(name, includeStuff ? t.Stuff : null);
         }
